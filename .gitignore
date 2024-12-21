@@ -1,0 +1,19 @@
+# Auto-generated cache files
+*/.mypy_cache
+*/.vscode
+*/.__pycache__
+
+# Common possible venv dir names
+env
+myenv
+.venv
+venv
+
+# Create a playground file named "playground" to safely play around
+# without accidentally committing it into version control
+playground*.py
+
+# Only allow the .env template file into VC
+.env
+
+# TODO: Add relevant pytest/coverage/whatever other pytest plugin files here
