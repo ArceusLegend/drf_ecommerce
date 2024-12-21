@@ -1,0 +1,5 @@
+[tool.black]
+exclude = '(\.git|venv|.venv|\.mypy_cache)'
+include = '\.pyi?$'
+line-length = 120
+target-version = ['py311']
