@@ -2,9 +2,9 @@ name: Linting
 
 on:
   push:
-    branches: [$GITHUB_REF]
+    branches: ["**"]
   pull_request:
-    branches: [$GITHUB_REF]
+    branches: ["**"]
 
 jobs:
     run-linters:
