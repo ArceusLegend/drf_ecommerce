@@ -1,0 +1,4 @@
+-r requirements.txt
+
+# Testing-related items go here - not necessary for production
+pytest==8.3.4

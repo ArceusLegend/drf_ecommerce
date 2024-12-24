@@ -1,0 +1,9 @@
+-r requirements-test.txt
+
+# Any dev tools go in this file - these are not required for production
+bandit==1.8.0
+black==24.10.0
+django-stubs==5.1.1
+flake8==7.1.1
+isort==5.13.2
+mypy==1.14.0
