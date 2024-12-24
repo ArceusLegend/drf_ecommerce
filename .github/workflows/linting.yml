@@ -1,0 +1,36 @@
+name: Linting
+
+on:
+  push:
+    branches: [ "Projects" ]
+  pull_request:
+    branches: [ "Projects" ]
+
+jobs:
+    run-linters:
+        name: Run linters
+        runs-on: ubuntu-latest
+        
+        steps:
+          - name: Checout repository
+            uses: actions/checkout@v4
+
+          - name: Build python environment
+            uses: actions/setup-python@v1
+            with:
+                python-version: "3.11"
+
+          - name: Install dependencies
+            run: pip install -r requirements-dev.txt
+
+          - name: Run lint checks
+            run: |
+              isort --diff --check .
+              echo Run black --diff --check --color .
+              black --diff --check --color .
+              echo Run flake8 .
+              flake8 .
+              echo Run mypy .
+              mypy .
+              echo Run bandit -r -c pyproject.toml .
+              bandit -r -c pyproject.toml .
