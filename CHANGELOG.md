@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- python-dotenv 1.0.1 as a requirement
+
+### Changed
+
+- Database settings to load dynamically based on the system's envvars
+- Debug mode to load from .env. It is now a toggle for dev/prod modes
+- Network settings to load dynamically from envvars. Will be overriden if dev mode is toggled on
+
 ## [0.0.3] - 26/12/2024
 
 ### Added
