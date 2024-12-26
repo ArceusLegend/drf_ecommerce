@@ -1,3 +1,4 @@
 # These are required for production
 Django==5.1.4
 djangorestframework==3.15.2
+python-dotenv==1.0.1
