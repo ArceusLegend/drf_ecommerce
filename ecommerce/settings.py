@@ -1,5 +1,12 @@
 import os
 from pathlib import Path
+from urllib.parse import urlparse
+
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
+
+# Load envvars from .env
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,9 +15,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# False by default, change it in .env
+DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 
-ALLOWED_HOSTS: list = []
+# Must have a valid value if DEBUG is False
+HOST_URL = os.getenv("HOST_URL")  # eg "https://www.google.com"
+if HOST_URL:
+    ALLOWED_HOSTS = [urlparse(HOST_URL).netloc]  # if using above example, will resolve to www.google.com
+    CSRF_TRUSTED_ORIGINS = [HOST_URL]
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    CORS_ALLOWED_ORIGINS = [
+        "https://storage.googleapis.com",
+        HOST_URL,
+    ]
+else:
+    ALLOWED_HOSTS = ["*"]
+    CORS_ORIGIN_ALLOW_ALL = True
+
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+    CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -58,12 +83,55 @@ WSGI_APPLICATION = "ecommerce.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+
+DATABASE_ENGINE = os.getenv("DATABASE_ENGINE", "sqlite3").lower()  # Supports 'sqlite3', 'postgres' and mysql
+
+if DATABASE_ENGINE == "sqlite3":
+    DATABASE_LOCATION = os.getenv("DB_LOCATION", "db.sqlite3")  # Always relative to project dir
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / DATABASE_LOCATION,
+        }
     }
-}
+
+elif DATABASE_ENGINE == "postgres":
+    DB_SERVER = os.getenv("DB_SERVER", "127.0.0.1")
+    DB_PORT = os.getenv("DB_PORT", "5432")
+    DB_NAME = os.getenv("DB_NAME", "postdb")
+    DB_USER = os.getenv("DB_USERNAME", "admin")
+    DB_PASS = os.getenv("DB_PASSWORD", "1q2w3e4r")
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "HOST": DB_SERVER,
+            "PORT": DB_PORT,
+            "NAME": DB_NAME,
+            "USER": DB_USER,
+            "PASSWORD": DB_PASS,
+        }
+    }
+
+elif DATABASE_ENGINE == "mysql":
+    DB_SERVER = os.getenv("DB_SERVER", "127.0.0.1")
+    DB_PORT = os.getenv("DB_PORT", "3306")
+    DB_NAME = os.getenv("DB_NAME", "mysqldb")
+    DB_USER = os.getenv("DB_USERNAME", "admin")
+    DB_PASS = os.getenv("DB_PASSWORD", "1q2w3e4r")
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "HOST": DB_SERVER,
+            "PORT": DB_PORT,
+            "NAME": DB_NAME,
+            "USER": DB_USER,
+            "PASSWORD": DB_PASS,
+        }
+    }
+
+else:
+    raise ImproperlyConfigured("Unknown database engine '{!s}'".format(DATABASE_ENGINE))
 
 
 # Password validation

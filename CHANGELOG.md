@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.1.0] - 27/12/2024
+
+### Added
+
+- python-dotenv 1.0.1 as a requirement
+- Extra example settings for the `.env.template`
+
+### Changed
+
+- Database settings to load dynamically based on the system's envvars
+- Debug mode to load from .env. It is now a toggle for dev/prod modes
+- Network settings to load dynamically from envvars. Will be overriden if dev mode is toggled on
+
 ## [0.0.3] - 26/12/2024
 
 ### Added
@@ -37,7 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The Django hardcoded secret key, replaced with an envvar
 
-[unreleased]: https://github.com/ArceusLegend/drf_ecommerce/compare/0.0.3...HEAD
+[unreleased]: https://github.com/ArceusLegend/drf_ecommerce/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/ArceusLegend/drf_ecommerce/compare/0.0.3...0.1.0
 [0.0.3]: https://github.com/ArceusLegend/drf_ecommerce/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/ArceusLegend/drf_ecommerce/compare/0.0.1...0.0.2
 [0.0.1]: https://github.com/ArceusLegend/drf_ecommerce/releases/tag/0.0.1
