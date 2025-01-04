@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- django-cors-headers as a requirement to allow API calls from other apps
+- CORS settings for the backend service
+- A basic React UI
+
 ## [0.1.0] - 27/12/2024
 
 ### Added
