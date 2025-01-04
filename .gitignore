@@ -16,4 +16,7 @@ playground*.py
 # Only allow the .env template file into VC
 .env
 
+# NPM specific stuff
+*/node_modules
+
 # TODO: Add relevant pytest/coverage/whatever other pytest plugin files here

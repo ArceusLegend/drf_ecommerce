@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Django extensions
+    "corsheaders",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -57,6 +60,13 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # From django-cors-headers
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+UI_BIND_PORT = os.getenv("UI_BIND_PORT", 3000)
+CORS_ORIGIN_WHITELIST = [
+    f"http://localhost:{UI_BIND_PORT}",  # The default port for create-react-app
 ]
 
 ROOT_URLCONF = "ecommerce.urls"
