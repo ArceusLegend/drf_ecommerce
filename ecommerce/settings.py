@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     # Django extensions
     "corsheaders",
     "rest_framework",
+    # Custom apps
+    "ecommerce.store",
 ]
 
 MIDDLEWARE = [
