@@ -1,5 +1,12 @@
 [tool.black]
-exclude = '(\.git|venv|.venv|env|myenv\.mypy_cache)'
+exclude = '(\.git|venv|.venv|env|myenv\.mypy_cache|ui)'
 include = '\.pyi?$'
 line-length = 120
 target-version = ['py311']
+
+[tool.bandit]
+skips = [
+    "B104",     # binding to all interfaces (needed for in-Docker services)
+    "B107",     # hardcoded_password_default
+]
+exclude_dirs = ["*/tests/*", ".venv", "venv", "ui"]
