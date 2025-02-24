@@ -60,7 +60,7 @@ class Image(models.Model):
 class Artist(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, primary_key=True, blank=False, null=False, editable=False)
     name = models.CharField(max_length=255)
-    artist_image = models.ImageField(upload_to="artists/pfp/")
+    artist_image = models.ImageField(upload_to="artists/pfp/", blank=True, null=True)
     description = models.TextField(blank=True)
 
     def __str__(self) -> str:
@@ -69,6 +69,9 @@ class Artist(models.Model):
 
 class DigitalFiles(models.Model):
     file = models.FileField()
+
+    class Meta:
+        verbose_name_plural = _("Digital Files")
 
 
 class Product(models.Model):
