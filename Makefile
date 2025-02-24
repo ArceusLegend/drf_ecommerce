@@ -13,3 +13,6 @@ check:
 format:
 	isort .
 	black .
+
+start_dev:
+	python manage.py runserver
