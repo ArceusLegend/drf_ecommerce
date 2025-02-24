@@ -1,13 +1,16 @@
 # Auto-generated cache files
-*/.mypy_cache
-*/.vscode
-*/__pycache__
+.mypy_cache/
+.vscode/
+__pycache__/
 
 # Common possible venv dir names
-env
-myenv
-.venv
-venv
+env/
+myenv/
+.venv/
+venv/
+
+# Also ignore sqlite files
+db.sqlite3
 
 # Create a playground file named "playground" to safely play around
 # without accidentally committing it into version control
@@ -17,6 +20,6 @@ playground*.py
 .env
 
 # NPM specific stuff
-*/node_modules
+node_modules/
 
 # TODO: Add relevant pytest/coverage/whatever other pytest plugin files here
